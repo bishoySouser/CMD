@@ -10,13 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/changePassword','HomeController@getChangePassword')->name('changePassword');
+Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 // admin
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => '/', 'middleware' => 'auth'], function () {
   Route::get('', [
     'uses' => 'SettingController@getAdminIndex',
     'as' => 'admin.index'
@@ -29,10 +28,22 @@ Route::group(['prefix' => 'admin'], function () {
     'uses' => 'SettingController@postSettingUpdate',
     'as' => 'admin.setting'
   ]);
+  // Route::get('search',[
+  //   'uses' => 'SettingController@postSearch',
+  //   'as' => 'admin.search'
+  // ]);
+  Route::any('search/edit',[
+    'uses' => 'SettingController@searchCategory',
+    'as' => 'admin.search'
+  ]);
+  Route::any('search',[
+    'uses' => 'SettingController@searchNew',
+    'as' => 'admin.searchNew'
+  ]);
 });
 
 // category
-Route::group(['prefix' => 'category'] , function() {
+Route::group(['prefix' => 'category', 'middleware' => 'auth'] , function() {
   Route::get('', [
     'uses' => 'CategoryController@getCategoryIndex',
     'as' => 'category.index'
@@ -64,21 +75,35 @@ Route::group(['prefix' => 'category'] , function() {
 });
 
 // new
-Route::group(['prefix' => 'new'] , function() {
-  Route::get('', function () {
-    return  view('new.index');
-  })->name('new.index');
-  Route::get('new/{id}', function ($id) {
-    return  view('new.new');
-  })->name('new.new');
-  Route::get('create', function () {
-    return  view('new.create');
-  })->name('new.create');
+Route::group(['prefix' => 'new',  'middleware' => 'auth'] , function() {
+  Route::get('', [
+    'uses' => 'NewController@getNewIndex',
+    'as' => 'new.index'
+  ]);
+  Route::get('new/{id}', [
+    'uses' => 'NewController@getNew',
+    'as' => 'new.new'
+  ]);
+  Route::get('create', [
+    'uses' => 'NewController@getNewCreate',
+    'as' => 'new.create'
+  ]);
+  Route::post('create', [
+    'uses' => 'NewController@postNewCreate',
+    'as' => 'new.create'
+  ]);
   Route::get('edit/{id}', function ($id) {
     return  view('new.edit');
   })->name('new.edit');
+  Route::get('delete/{id}', [
+    'uses' => 'NewController@getNewDelete',
+    'as' => 'new.delete'
+  ]);
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+route::post('/login', [
+  'uses' => 'SigninController@signin',
+  'as' => 'auth.signin'
+]);

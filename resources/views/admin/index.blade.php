@@ -14,9 +14,9 @@
         <div class="card-body-icon">
           <i class="fas fa-fw fa-comments"></i>
         </div>
-        <div class="mr-5">26 News!</div>
+        <div class="mr-5">{{ count($news) }} News!</div>
       </div>
-      <a class="card-footer text-white clearfix small z-1" href="#">
+      <a class="card-footer text-white clearfix small z-1" href="{{ route('new.index') }}">
         <span class="float-left">View Details</span>
         <span class="float-right">
           <i class="fas fa-angle-right"></i>
@@ -31,9 +31,9 @@
         <div class="card-body-icon">
           <i class="fas fa-fw fa-list"></i>
         </div>
-        <div class="mr-5">11 Categories!</div>
+        <div class="mr-5">{{ count($categories) }} Categories!</div>
       </div>
-      <a class="card-footer text-white clearfix small z-1" href="#">
+      <a class="card-footer text-white clearfix small z-1" href="{{ route('category.index') }}">
         <span class="float-left">View Details</span>
         <span class="float-right">
           <i class="fas fa-angle-right"></i>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use Auth;
 
 class CategoryController extends Controller
 {
@@ -18,6 +19,7 @@ class CategoryController extends Controller
       ]);
       $categroy =  new Category([
         'name' => $request->input('name'),
+        'user_id' => Auth::id(),
       ]);
       $categroy->save();
       return redirect()->route('category.index')->with('info', 'Category is create');
@@ -29,7 +31,7 @@ class CategoryController extends Controller
     }
     public function getCategoryIndex()
     {
-      $categroy = Category::orderBy('id','desc')->get();
+      $categroy = Category::where('user_id', Auth::id() )->get();
       return view('category.index', ['categories' => $categroy]);
     }
     public function getCategoryEdit($id)
