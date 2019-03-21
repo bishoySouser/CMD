@@ -12,12 +12,12 @@
 
       <div class="col-md-4">
         <label for="exampleFormControlFile1">upload main photo</label>
-        <img src="{{asset("storege/$new->photo")}}" alt="">
+        <img src="{{asset('images')}}/{{$new->photo}}" class="img-thumbnail" alt="">
       </div>
 
       <div class="col-md-4">
         <label for="inputState">Category:</label>
-        <p></p>
+        <p>{{$category->name}}</p>
       </div>
 
   </div>

@@ -15,17 +15,17 @@
         <p><strong>{{ $categroy->name }}</strong>
           <a href="{{ route('category.edit', ['id' => $categroy->id]) }}">Edit</a>
           <a href="{{ route('category.delete', ['id' => $categroy->id]) }}" class="confirmation">Delete</a>
-          <script type="text/javascript">
-              var elems = document.getElementsByClassName('confirmation');
-              var confirmIt = function (e) {
-                  if (!confirm('Are you sure?')) e.preventDefault();
-              };
-              for (var i = 0, l = elems.length; i < l; i++) {
-                  elems[i].addEventListener('click', confirmIt, false);
-              }
-          </script>
           <a href="{{ route('category.category', ['id' => $categroy->id]) }}">show</a>
       @endforeach
+      <script type="text/javascript">
+          var elems = document.getElementsByClassName('confirmation');
+          var confirmIt = function (e) {
+              if (!confirm('Are you sure?')) e.preventDefault();
+          };
+          for (var i = 0, l = elems.length; i < l; i++) {
+              elems[i].addEventListener('click', confirmIt, false);
+          }
+      </script>
     </div>
 
   </div>

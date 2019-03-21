@@ -92,9 +92,14 @@ Route::group(['prefix' => 'new',  'middleware' => 'auth'] , function() {
     'uses' => 'NewController@postNewCreate',
     'as' => 'new.create'
   ]);
-  Route::get('edit/{id}', function ($id) {
-    return  view('new.edit');
-  })->name('new.edit');
+  Route::get('edit/{id}', [
+    'uses' => 'NewController@getNewEdit',
+    'as' => 'new.edit'
+  ]);
+  Route::post('edit', [
+    'uses' => 'NewController@postNewUpdate',
+    'as' => 'new.update'
+  ]);
   Route::get('delete/{id}', [
     'uses' => 'NewController@getNewDelete',
     'as' => 'new.delete'

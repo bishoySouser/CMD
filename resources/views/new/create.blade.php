@@ -19,10 +19,10 @@
 
           <div class="form-group col-md-4">
             <label for="inputState">Category</label>
-            <select id="inputState" name="category_id" class="form-control">
+            <select name="category_id"  id="inputState" class="form-control">
               <option>Choose...</option>
               @foreach ($categories as $category);
-                <option value="{{$category->id}}" {{ $category['id'] == 'Enable' ? 'selected' : '' }}>{{ $category->name }}</option>
+                <option value="{{$category->id}}" >{{ $category->name }}</option>
               @endforeach
             </select>
           </div>
